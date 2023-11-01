@@ -1,0 +1,13 @@
+- name: Disable apache service
+  become: yes
+  ansible.builtin.systemd:
+    name: apache2
+    state: stopped
+    enabled: no
+
+- name: Enable nginx service
+  become: yes
+  ansible.builtin.systemd:
+    name: nginx
+    state: started
+    enabled: yes

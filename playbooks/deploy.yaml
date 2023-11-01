@@ -1,0 +1,12 @@
+- name: Prepare backend servers
+  hosts: backend
+  roles:
+  - postgresql_backend
+  - postgrest_backend
+
+- name: Prepare frontend servers
+  hosts: frontend
+  roles:
+  - nginx_frontend
+  - postgrest_frontend
+  - pgadmin_frontend

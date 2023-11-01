@@ -1,0 +1,54 @@
+- name: "CREATE ROLE {{ postgrest_authenticator_role }} NOINHERIT"
+  become_user: postgres
+  become: yes
+  community.postgresql.postgresql_user:
+    name: "{{ postgrest_authenticator_role }}"
+    password: "{{ postgrest_password }}"
+    role_attr_flags: "NOINHERIT"
+
+- name: "CREATE ROLE {{ postgrest_anon_role }} NOLOGIN"
+  become_user: postgres
+  become: yes
+  community.postgresql.postgresql_user:
+    name: "{{ postgrest_anon_role }}"
+    role_attr_flags: "NOLOGIN"
+
+- name: "CREATE DATABASE {{ postgrest_database }}"
+  become_user: postgres
+  become: yes
+  community.postgresql.postgresql_db:
+    name: "{{ postgrest_database }}"
+    owner: postgres
+    state: present
+    template: template0
+
+- name: "CREATE SCHEMAS {{ postgrest_schemas | join(',') }}"
+  with_items: "{{ postgrest_schemas }}"
+  become_user: postgres
+  become: yes
+  community.postgresql.postgresql_schema:
+    database: "{{ postgrest_database }}"
+    name: "{{ item }}"
+    owner: postgres
+    state: present
+
+- name: "Grant USAGE ON SCHEMAS {{ postgrest_schemas | join(',') }} TO {{postgrest_anon_role}}"
+  become_user: postgres
+  become: yes
+  community.postgresql.postgresql_privs:
+    database: "{{ postgrest_database }}"
+    state: present
+    privs: USAGE
+    type: schema
+    objs: "{{ postgrest_schemas | join(',') }}"
+    roles: "{{ postgrest_anon_role }}"
+
+- name: "Grant {{ postgrest_anon_role }} to {{ postgrest_authenticator_role }}"
+  become_user: postgres
+  become: yes
+  community.postgresql.postgresql_privs:
+    database: "{{ postgrest_database }}"
+    type: group
+    state: present
+    objs: "{{ postgrest_anon_role }}"
+    roles: "{{ postgrest_authenticator_role }}"

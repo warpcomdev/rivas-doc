@@ -1,0 +1,19 @@
+- name: Install postgresql-common
+  package:
+    name: postgresql-common
+    state: present
+  become: yes
+
+- name: Add pgdg repository
+  become: yes
+  ansible.builtin.command: /usr/share/postgresql-common/pgdg/apt.postgresql.org.sh -y
+  args:
+    creates: /etc/apt/sources.list.d/pgdg.list
+
+- name: Install postgresql packages
+  package:
+    name:
+    - "postgresql-{{ postgresql_version }}"
+    - "postgresql-{{ postgresql_version }}-postgis"
+    state: present
+  become: yes

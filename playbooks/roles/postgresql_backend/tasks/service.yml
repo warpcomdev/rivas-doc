@@ -1,0 +1,13 @@
+- name: Start postgres meta-service
+  ansible.builtin.systemd:
+    name: postgresql
+    state: started
+    enabled: yes
+  become: yes
+
+- name: Start postgres@{{ postgresql_version }}-main service
+  ansible.builtin.systemd:
+    name: "postgresql@{{ postgresql_version }}-main"
+    state: started
+    enabled: yes
+  become: yes

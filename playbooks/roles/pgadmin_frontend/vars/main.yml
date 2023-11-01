@@ -1,0 +1,5 @@
+---
+# vars file for postgres_server
+postgresql_host: backend.mshome.net
+postgresql_port: 5432
+pgadmin4_password: "Chang3m3!"

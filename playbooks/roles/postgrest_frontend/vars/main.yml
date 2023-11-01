@@ -1,0 +1,11 @@
+---
+postgrest_version: v11.2.1
+postgrest_authenticator_role: authenticator
+postgrest_password: Chang3m3!
+postgresql_host: backend.mshome.net
+postgresql_port: 5432
+postgrest_database: rivas
+postgrest_schemas:
+- terceros
+postgrest_anon_role: web_anon
+postgrest_url: http://localhost/api

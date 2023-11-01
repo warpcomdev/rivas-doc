@@ -1,0 +1,10 @@
+---
+# vars file for postgres_server
+postgresql_version: 16
+postgresql_password: "Chang3m3!"
+postgresql_dbs:
+- name: pgadmin4
+  schemas:
+  - pgadmin4
+  user: pgadmin4
+  password: "Chang3m3!"

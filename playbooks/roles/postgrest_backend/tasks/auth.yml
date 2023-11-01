@@ -1,0 +1,16 @@
+- name: Create SQL template file
+  ansible.builtin.template:
+    src: auth.sql
+    dest: /tmp/auth.sql
+  register: sql_template
+  notify:
+  - Remove SQL template file
+
+- name: Create postgrest auth solution
+  become_user: postgres
+  become: yes
+  when: sql_template is not skipped
+  community.postgresql.postgresql_script:
+    db: "{{ postgrest_database }}"
+    path: /tmp/auth.sql
+    search_path: "{{ postgrest_schemas }}"

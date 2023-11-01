@@ -1,0 +1,12 @@
+[Unit]
+Description=postgrest backend
+After=syslog.target
+
+[Service]
+User=postgrest
+ExecStart=/usr/local/bin/postgrest /etc/postgrest/postgrest.conf
+Restart=always
+Type=simple
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,35 @@
+- name: Create postgrest group
+  become: yes
+  ansible.builtin.group:
+    name: postgrest
+    state: present
+    system: yes
+
+- name: Create postgrest user
+  become: yes
+  ansible.builtin.user:
+    name: postgrest
+    group: postgrest
+    state: present
+    home: /etc/postgrest
+    system: yes
+
+- name: Create postgrest directory
+  become: yes
+  ansible.builtin.file:
+    dest: /etc/postgrest
+    state: directory
+    owner: postgrest
+    group: postgrest
+    mode: '0500'
+
+- name: Create postgrest config file
+  become: yes
+  ansible.builtin.template:
+    src: postgrest.conf
+    dest: /etc/postgrest/postgrest.conf
+    owner: postgrest
+    group: postgrest
+    mode: '0400'
+  notify:
+  - Restart postgrest

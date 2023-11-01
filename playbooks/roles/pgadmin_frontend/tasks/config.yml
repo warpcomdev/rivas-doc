@@ -1,0 +1,41 @@
+# Install the public key for the repository (if not done previously):
+- name: Create data_dir for pgadmin
+  become: yes
+  ansible.builtin.file:
+    path: /var/lib/pgadmin4
+    owner: www-data
+    group: www-data
+    state: directory
+    mode: '0750'
+
+- name: Copy pgadmin config_local.py file
+  become: yes
+  ansible.builtin.template:
+    src: config_local.py
+    dest:  /usr/pgadmin4/web/config_local.py
+    owner: root
+    group: root
+    mode: '0644'
+
+# This is interactive, must be manual
+#- name: Run initial pgadmin4 setup
+#  become: yes
+#  ansible.builtin.command: /usr/pgadmin4/venv/bin/python /usr/pgadmin4/web/setup.py
+
+- name: Change ownership of pgadmin config dir
+  become: yes
+  ansible.builtin.file:
+    path: /var/lib/pgadmin4
+    owner: www-data
+    group: www-data
+    mode: "u=rwX,g=rX"
+    recurse: yes
+
+- name: Add pgpassword file for pgAdmin4, with restricted permissions
+  become: yes
+  ansible.builtin.copy:
+    content: "{{ postgresql_host }}:{{ postgresql_port }}:pgadmin4:pgadmin4:{{ pgadmin4_password }}"
+    dest: /var/lib/pgadmin4/pgpass
+    owner: www-data
+    group: www-data
+    mode: '0400'

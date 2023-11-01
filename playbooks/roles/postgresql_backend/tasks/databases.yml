@@ -1,0 +1,27 @@
+- name: Create database owners
+  with_items: "{{ postgresql_dbs }}"
+  become_user: postgres
+  become: yes
+  community.postgresql.postgresql_user:
+    name: "{{ item.user }}"
+    password: "{{ item.password }}"
+
+- name: Create databases
+  with_items: "{{ postgresql_dbs }}"
+  become_user: postgres
+  become: yes
+  community.postgresql.postgresql_db:
+    name: "{{ item.name }}"
+    owner: "{{ item.user }}"
+    state: present
+    template: template0
+
+- name: Create schemas
+  loop: "{{ postgresql_dbs | subelements('schemas') }}"
+  become_user: postgres
+  become: yes
+  community.postgresql.postgresql_schema:
+    database: "{{ item.0.name }}"
+    name: "{{ item.1 }}"
+    owner: "{{ item.0.user }}"
+    state: present

@@ -1,0 +1,8 @@
+---
+- include_tasks: config.yml
+  tags:
+  - config
+
+- include_tasks: auth.yml
+  tags:
+  - config

@@ -1,0 +1,29 @@
+- name: Install python3 psycopg2  and acl
+  package:
+    name:
+    - python3-psycopg2
+    - acl
+    state: present
+  become: yes
+
+- name: Set postgresql superuser password
+  become_user: postgres
+  become: yes
+  community.postgresql.postgresql_user:
+    db: postgres
+    name: postgres
+    password: "{{ postgresql_password }}"
+
+- name: Copy postgresql config files
+  become: yes
+  with_items:
+  - postgresql.conf
+  - pg_hba.conf
+  ansible.builtin.copy:
+    src: "{{ item }}"
+    dest:  "/etc/postgresql/{{ postgresql_version }}/main/{{ item }}"
+    owner: postgres
+    group: postgres
+    mode: '0644'
+  notify:
+  - Restart postgresql

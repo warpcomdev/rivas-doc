@@ -1,0 +1,7 @@
+- name: Download postgrest file
+  become: yes
+  ansible.builtin.unarchive:
+    src: https://github.com/PostgREST/postgrest/releases/download/{{ postgrest_version }}/postgrest-{{ postgrest_version }}-linux-static-x64.tar.xz
+    dest: /usr/local/bin
+    remote_src: yes
+    creates: /usr/local/bin/postgrest

@@ -1,0 +1,6 @@
+---
+# handlers file for postgres_server
+- name: Remove SQL template file
+  ansible.builtin.file:
+    dest: /tmp/auth.sql
+    state: absent

@@ -1,0 +1,16 @@
+- name: Copy uwsgi pgAdmin4 systemd service
+  become: yes
+  ansible.builtin.copy:
+    src: pgadmin4.service
+    dest: /etc/systemd/system/pgadmin4.service
+    owner: root
+    group: root
+    mode: '0644'
+
+- name: Enable pgadmin4 service
+  become: yes
+  ansible.builtin.systemd:
+    name: pgadmin4
+    state: started
+    enabled: yes
+    daemon_reload: yes

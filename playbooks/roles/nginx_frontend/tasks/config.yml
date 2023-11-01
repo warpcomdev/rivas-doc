@@ -1,0 +1,10 @@
+- name: Copy default nginx site config file
+  become: yes
+  ansible.builtin.copy:
+    src: default.conf
+    dest:  /etc/nginx/sites-enabled/default
+    owner: root
+    group: root
+    mode: '0644'
+  notify:
+  - Restart nginx

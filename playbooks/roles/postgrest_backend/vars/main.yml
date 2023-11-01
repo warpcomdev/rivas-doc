@@ -1,0 +1,8 @@
+---
+postgrest_authenticator_role: authenticator
+postgrest_password: Chang3m3!
+postgrest_database: rivas
+postgrest_schemas:
+- terceros
+postgrest_anon_role: web_anon
+postgrest_jwt_key: reallySafeAndSecureJWTSigningKey1234

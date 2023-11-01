@@ -1,0 +1,14 @@
+[Unit]
+Description=uWSGI pgAdmin4 backend
+After=syslog.target
+
+[Service]
+User=www-data
+ExecStart=/usr/bin/uwsgi --plugin python3 --socket /tmp/pgadmin4.sock --virtualenv /usr/pgadmin4/venv --py-sys-executable /usr/pgadmin4/venv/bin/python --processes 1 --threads 25 --chdir /usr/pgadmin4/web --manage-script-name --mount /pgadmin4=pgAdmin4:app
+Restart=always
+KillSignal=SIGQUIT
+Type=notify
+NotifyAccess=all
+
+[Install]
+WantedBy=multi-user.target
