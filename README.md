@@ -17,7 +17,7 @@ sudo apt install postgresql-16 postgresql-16-postgis
 sudo apt install -y haproxy
 ```
 
-## pgRest
+## postgRest
 
 Referencia: https://postgrest.org/en/stable/explanations/install.html#install
 
