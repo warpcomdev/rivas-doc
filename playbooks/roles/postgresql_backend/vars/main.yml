@@ -3,6 +3,7 @@
 postgresql_version: 16
 postgresql_password: "Chang3m3!"
 postgresql_dbs:
+# Base de datos para la config de pgAdmin4
 - name: pgadmin4
   schemas:
   - pgadmin4

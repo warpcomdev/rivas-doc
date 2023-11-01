@@ -1,8 +1,11 @@
 ---
+# Sobre el authenticator y el anon role, ver https://postgrest.org/en/stable/references/auth.html
 postgrest_authenticator_role: authenticator
 postgrest_password: Chang3m3!
+postgrest_anon_role: web_anon
+# Base de datos y schemas a los que postgrest proporciona acceso
 postgrest_database: rivas
 postgrest_schemas:
 - terceros
-postgrest_anon_role: web_anon
+# Clave de firma de los JWT. 
 postgrest_jwt_key: reallySafeAndSecureJWTSigningKey1234
