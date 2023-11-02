@@ -14,7 +14,7 @@
   ansible.builtin.unarchive:
     src: swagger-ui-dist.tgz
     dest: /var/www/html
-    creates: /var/www/html/swagger-ui-bundle.js
+    #creates: /var/www/html/swagger-ui-bundle.js
 
 - name: Replace default swagger ui URL in all files
   become: yes
@@ -28,7 +28,7 @@
   ansible.builtin.replace:
     path: "/var/www/html/{{ item }}"
     regexp: "https://petstore.swagger.io/v2/swagger.json"
-    replace: "{{ postgrest_url }}/api/auth"
+    replace: "{{ postgrest_url }}/auth"
 
 - name: Change ownership of swagger ui
   become: yes
