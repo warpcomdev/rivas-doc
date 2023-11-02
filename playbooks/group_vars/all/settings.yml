@@ -1,0 +1,12 @@
+---
+postgresql_version: "16"
+postgrest_version: "v11.2.1"
+postgrest_url: http://localhost/api
+postgresql_host: backend.mshome.net
+postgresql_port: 5432
+postgrest_authenticator_role: authenticator
+postgrest_anon_role: web_anon
+# Base de datos y schemas a los que postgrest proporciona acceso
+postgrest_database: rivas
+postgrest_schemas:
+- terceros
