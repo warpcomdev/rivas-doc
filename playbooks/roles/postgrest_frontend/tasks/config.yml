@@ -36,10 +36,10 @@
 
 - name: Create custom config files
   become: yes
-  loop: "{{ postgrest_dbs }}"
+  loop: "{{ postgrest_alias }}"
   ansible.builtin.template:
     src: "postgrest.conf"
-    dest: "/etc/postgrest/postgrest_{{ item.name }}.conf"
+    dest: "/etc/postgrest/postgrest_{{ item.path }}.conf"
     owner: postgrest
     group: postgrest
     mode: '0400'

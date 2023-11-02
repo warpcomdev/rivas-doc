@@ -14,9 +14,21 @@ postgrest_schema: api
 postgrest_api_port: "3000"
 postgrest_authenticator_role: authenticator
 postgrest_anon_role: web_anon
-# Base de datos y schemas a los que postgrest proporciona acceso
+# Base de datos a crear para postgrest
 postgrest_dbs:
-- name: rivas
+- bbddunicarivas
+# Rutas de api, y combinaciones de bbdd + schemas a las que dan acceso
+# NOTA: el path "auth" está reservado para la base de datos de login
+postgrest_alias:
+- database: bbddunicarivas
+  path: bbddunicarivas
   api_port: "3001"
   schemas:
+  - empleados
   - terceros
+  - territorios
+- database: bbddunicarivas
+  path: telecomunicaciones
+  api_port: "3002"
+  schemas:
+  - telecomunicaciones

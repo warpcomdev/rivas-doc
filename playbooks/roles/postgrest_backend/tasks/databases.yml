@@ -3,27 +3,27 @@
   become: yes
   loop: "{{ postgrest_dbs }}"
   community.postgresql.postgresql_db:
-    name: "{{ item.name }}"
+    name: "{{ item }}"
     owner: postgres
     state: present
     template: template0
 
 - name: "CREATE SCHEMAS"
-  loop: "{{ postgrest_dbs | subelements('schemas') }}"
+  loop: "{{ postgrest_alias | subelements('schemas') }}"
   become_user: postgres
   become: yes
   community.postgresql.postgresql_schema:
-    database: "{{ item.0.name }}"
+    database: "{{ item.0.database }}"
     name: "{{ item.1 }}"
     owner: postgres
     state: present
 
 - name: "Grant USAGE ON SCHEMA TO {{ postgrest_anon_role }}"
-  loop: "{{ postgrest_dbs }}"
+  loop: "{{ postgrest_alias }}"
   become_user: postgres
   become: yes
   community.postgresql.postgresql_privs:
-    database: "{{ item.name }}"
+    database: "{{ item.database }}"
     state: present
     privs: USAGE
     type: schema
