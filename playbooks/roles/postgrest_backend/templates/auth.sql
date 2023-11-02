@@ -109,7 +109,7 @@ WITH
 SELECT basic_auth.url_encode(public.hmac(signables, secret, alg.id)) FROM alg;
 $$ IMMUTABLE;
 
-CREATE OR REPLACE FUNCTION basic_auth.sign(payload json, secret text, algorithm text DEFAULT 'HS512')
+CREATE OR REPLACE FUNCTION basic_auth.sign(payload json, secret text, algorithm text DEFAULT 'HS256')
 RETURNS text LANGUAGE sql AS $$
 WITH
   header AS (
