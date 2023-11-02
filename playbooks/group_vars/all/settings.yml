@@ -4,13 +4,13 @@ postgrest_version: "v11.2.1"
 postgrest_url: http://localhost/api
 postgresql_host: backend.mshome.net
 postgresql_port: 5432
-postgrest_authenticator_role: authenticator
-postgrest_anon_role: web_anon
 # Settings de pgadmin4
 pgadmin4_database: system
 pgadmin4_schema: pgadmin4
 pgadmin4_user: pgadmin4
-# Base de datos y schemas a los que postgrest proporciona acceso
+# Settings de postgrest
 postgrest_database: rivas
 postgrest_schema: api
 postgrest_api_port: "3000"
+postgrest_authenticator_role: authenticator
+postgrest_anon_role: web_anon

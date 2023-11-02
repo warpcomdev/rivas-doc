@@ -1,17 +1,2 @@
 ---
-# defaults file for postgres_server
-# Sobre el authenticator y el anon role, ver https://postgrest.org/en/stable/references/auth.html
-postgrest_database: pgadmin4
-postgrest_schema: api
-postgrest_authenticator_role: authenticator
-postgrest_password: Chang3m3!
-postgrest_anon_role: web_anon
-postgrest_api_port: "3000"
-# Clave de firma de los JWT. 
-postgrest_jwt_key: reallySafeAndSecureJWTSigningKey1234
-# Base de datos y schemas a los que postgrest proporciona acceso
-postgrest_dbs:
-- name: rivas
-  api_port: "3001"
-  schemas:
-  - terceros
+

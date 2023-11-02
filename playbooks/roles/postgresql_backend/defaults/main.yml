@@ -1,11 +1,2 @@
 ---
-# defaults file for postgres_server
-postgresql_version: "16"
-postgresql_password: "Chang3m3!"
-postgresql_dbs:
-  # Base de datos para la config de sistema
-  - name: "{{ pgadmin4_database }}"
-    schemas:
-    - "{{ pgadmin4_schema }}"
-    user: "{{ pgadmin4_user }}"
-    password: "{{ pgadmin4_password }}"
+
