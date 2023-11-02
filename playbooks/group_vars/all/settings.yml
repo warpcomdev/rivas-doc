@@ -2,7 +2,7 @@
 postgresql_version: "16"
 postgrest_version: "v11.2.1"
 postgrest_url: http://localhost/api
-postgresql_host: backend.mshome.net
+postgresql_host: "{{ hostvars['srvbbddunicadb1']['ansible_default_ipv4']['address'] }}"
 postgresql_port: 5432
 # Settings de pgadmin4
 pgadmin4_database: system

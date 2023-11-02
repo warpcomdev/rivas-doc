@@ -3,5 +3,12 @@
 - name: Restart postgrest
   become: yes
   ansible.builtin.systemd:
-    name: postgrest
+    name: postgrest@auth
+    state: restarted
+
+- name: Restart every postgrest
+  become: yes
+  loop: "{{ postgrest_alias }}"
+  ansible.builtin.systemd:
+    name: "postgrest@{{ item.path }}"
     state: restarted

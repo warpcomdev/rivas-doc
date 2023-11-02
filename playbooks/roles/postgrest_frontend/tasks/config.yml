@@ -44,4 +44,4 @@
     group: postgrest
     mode: '0400'
   notify:
-  - Restart postgrest
+  - Restart every postgrest
