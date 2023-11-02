@@ -61,5 +61,5 @@ export PGPASSWORD="password del usuario pgadmin"
 Y tras esto, volver a ejecutar el playbook:
 
 ```bash
-ansible-playbook -i inventory/hosts --ask-pass --ask-become.pass playbooks/deploy.sh
+ansible-playbook -i inventory/hosts --ask-pass --ask-become-pass --ask-vault-pass playbooks/deploy.sh
 ```
