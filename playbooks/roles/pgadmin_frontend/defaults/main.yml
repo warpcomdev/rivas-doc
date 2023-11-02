@@ -1,9 +1,1 @@
 ---
-postgresql_host: backend.mshome.net
-postgresql_port: 5432
-# Este password es el de la base de datos "pgadmin" que el playbook crea
-# en postgres, con usuario "pgadmin", para guardar las configs de pgadmin
-pgadmin4_database: system
-pgadmin4_schema: pgadmin4
-pgadmin4_user: pgadmin4
-pgadmin4_password: "Chang3m3!"
