@@ -164,7 +164,7 @@ CHECK_SESSION_FILES_INTERVAL = 24
 # the user will be forcibly logged out from pgAdmin. Set to zero to disable
 # the timeout.
 # Note: This is applicable only for SERVER_MODE=True.
-USER_INACTIVITY_TIMEOUT = 0
+USER_INACTIVITY_TIMEOUT = 1800
 
 # OVERRIDE_USER_INACTIVITY_TIMEOUT when set to True will override
 # USER_INACTIVITY_TIMEOUT when long running queries in the Query Tool
