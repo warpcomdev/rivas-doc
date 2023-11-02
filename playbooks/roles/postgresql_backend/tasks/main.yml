@@ -4,6 +4,10 @@
   tags:
   - install
 
+- include_tasks: config.yml
+  tags:
+  - service
+
 - include_tasks: service.yml
   tags:
   - service
@@ -11,7 +15,3 @@
 - include_tasks: databases.yml
   tags:
   - config
-
-- include_tasks: config.yml
-  tags:
-  - service
