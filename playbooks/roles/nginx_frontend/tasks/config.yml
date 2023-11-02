@@ -8,3 +8,19 @@
     mode: '0644'
   notify:
   - Restart nginx
+
+- name: Install swagger ui dist
+  become: yes
+  ansible.builtin.unarchive:
+    src: swagger-ui-dist.tgz
+    dest: /var/www/html
+    creates: /var/www/html/swagger-ui-bundle.js
+
+- name: Change ownership of swagger ui
+  become: yes
+  ansible.builtin.file:
+    dest: /var/www/html
+    owner: www-data
+    group: www-data
+    state: directory
+    recursive: yes
