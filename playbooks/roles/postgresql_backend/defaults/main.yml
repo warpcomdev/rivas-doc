@@ -3,9 +3,9 @@
 postgresql_version: "16"
 postgresql_password: "Chang3m3!"
 postgresql_dbs:
-  # Base de datos para la config de pgAdmin4
-  - name: pgadmin4
+  # Base de datos para la config de sistema
+  - name: "{{ pgadmin4_database }}"
     schemas:
-    - pgadmin4
-    user: pgadmin4
-    password: "Chang3m3!"
+    - "{{ pgadmin4_schema }}"
+    user: "{{ pgadmin4_user }}"
+    password: "{{ pgadmin4_password }}"

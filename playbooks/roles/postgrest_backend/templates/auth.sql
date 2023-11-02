@@ -129,7 +129,7 @@ $$ IMMUTABLE;
 -- login should be on your exposed schema
 
 create or replace function
-{{ postgrest_schemas.0 }}.login(api_id text, api_key text) returns basic_auth.jwt_token as $$
+{{ postgrest_schema }}.login(api_id text, api_key text) returns basic_auth.jwt_token as $$
 declare
   _role name;
   result basic_auth.jwt_token;
@@ -152,4 +152,4 @@ begin
 end;
 $$ language plpgsql security definer;
 
-grant execute on function {{ postgrest_schemas.0 }}.login(text,text) to {{ postgrest_anon_role }};
+grant execute on function {{ postgrest_schema }}.login(text,text) to {{ postgrest_anon_role }};

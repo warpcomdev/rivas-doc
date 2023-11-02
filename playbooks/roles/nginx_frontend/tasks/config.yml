@@ -1,6 +1,6 @@
 - name: Copy default nginx site config file
   become: yes
-  ansible.builtin.copy:
+  ansible.builtin.template:
     src: default.conf
     dest:  /etc/nginx/sites-enabled/default
     owner: root

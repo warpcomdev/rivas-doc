@@ -13,4 +13,4 @@
   community.postgresql.postgresql_script:
     db: "{{ postgrest_database }}"
     path: /tmp/auth.sql
-    search_path: "{{ postgrest_schemas }}"
+    search_path: "{{ postgrest_schema }}"

@@ -1,0 +1,31 @@
+- name: "CREATE DATABASE {{ postgrest_dbs | join(',') }}"
+  become_user: postgres
+  become: yes
+  loop: "{{ postgres_dbs }}"
+  community.postgresql.postgresql_db:
+    name: "{{ item.name }}"
+    owner: postgres
+    state: present
+    template: template0
+
+- name: "CREATE SCHEMAS"
+  loop: "{{ postgrest_dbs | subitems('schemas') }}"
+  become_user: postgres
+  become: yes
+  community.postgresql.postgresql_schema:
+    database: "{{ item.0.name }}"
+    name: "{{ item.1 }}"
+    owner: postgres
+    state: present
+
+- name: "Grant USAGE ON SCHEMA TO {{ postgrest_anon_role }}"
+  loop: "{{ postgrest_dbs }}"
+  become_user: postgres
+  become: yes
+  community.postgresql.postgresql_privs:
+    database: "{{ item.name }}"
+    state: present
+    privs: USAGE
+    type: schema
+    objs: "{{ item.schemas | join(',') }}"
+    roles: "{{ postgrest_anon_role }}"

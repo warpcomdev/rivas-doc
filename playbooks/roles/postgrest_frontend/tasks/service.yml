@@ -1,16 +1,25 @@
 - name: Copy postgrest systemd service
   become: yes
   ansible.builtin.copy:
-    src: postgrest.service
-    dest: /etc/systemd/system/postgrest.service
+    src: postgrest@.service
+    dest: /etc/systemd/system/postgrest@.service
     owner: root
     group: root
     mode: '0644'
 
-- name: Enable postgrest service
+- name: Enable postgrest@auth service
   become: yes
   ansible.builtin.systemd:
-    name: postgrest
+    name: postgrest@auth
+    state: started
+    enabled: yes
+    daemon_reload: yes
+
+- name: Enable other postgrest services
+  become: yes
+  loop: "postgrest_dbs"
+  ansible.builtin.systemd:
+    name: "postgrest@{{ item.name }}"
     state: started
     enabled: yes
     daemon_reload: yes

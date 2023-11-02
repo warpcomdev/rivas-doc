@@ -6,3 +6,7 @@
 - include_tasks: auth.yml
   tags:
   - config
+
+- include_tasks: databases.yml
+  tags:
+  - config

@@ -1,10 +1,10 @@
 [Unit]
-Description=postgrest backend
+Description=postgrest backend %i
 After=syslog.target
 
 [Service]
 User=postgrest
-ExecStart=/usr/local/bin/postgrest /etc/postgrest/postgrest.conf
+ExecStart=/usr/local/bin/postgrest /etc/postgrest/postgrest_%i.conf
 Restart=always
 Type=simple
 

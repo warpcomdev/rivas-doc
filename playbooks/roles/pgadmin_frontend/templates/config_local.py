@@ -82,7 +82,7 @@ MAX_SESSION_IDLE_TIME = 60
 # Using PGPASS file
 # postgresql://username@host:port?options=-csearch_path=pgadmin
 ##########################################################################
-CONFIG_DATABASE_URI = 'postgresql://pgadmin4@{{ postgresql_host }}:{{ postgresql_port }}?passfile=/var/lib/pgadmin4/pgpass&options=-csearch_path=pgadmin4'
+CONFIG_DATABASE_URI = 'postgresql://{{ pgadmin4_user }}@{{ postgresql_host }}:{{ postgresql_port }}/{{ pgadmin4_database }}?passfile=/var/lib/pgadmin4/pgpass&options=-csearch_path={{ pgadmin4_schema }}'
 
 ##########################################################################
 # User account and settings storage

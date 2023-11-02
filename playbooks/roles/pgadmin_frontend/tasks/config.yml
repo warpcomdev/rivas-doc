@@ -34,7 +34,7 @@
 - name: Add pgpassword file for pgAdmin4, with restricted permissions
   become: yes
   ansible.builtin.copy:
-    content: "{{ postgresql_host }}:{{ postgresql_port }}:pgadmin4:pgadmin4:{{ pgadmin4_password }}"
+    content: "{{ postgresql_host }}:{{ postgresql_port }}:{{ pgadmin4_database }}:{{ pgadmin4_user }}:{{ pgadmin4_password }}"
     dest: /var/lib/pgadmin4/pgpass
     owner: www-data
     group: www-data

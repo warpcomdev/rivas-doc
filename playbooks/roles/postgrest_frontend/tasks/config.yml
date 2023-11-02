@@ -23,11 +23,23 @@
     group: postgrest
     mode: '0500'
 
-- name: Create postgrest config file
+- name: Create postgrest auth config file
   become: yes
   ansible.builtin.template:
-    src: postgrest.conf
-    dest: /etc/postgrest/postgrest.conf
+    src: postgrest_auth.conf
+    dest: /etc/postgrest/postgrest_auth.conf
+    owner: postgrest
+    group: postgrest
+    mode: '0400'
+  notify:
+  - Restart postgrest
+
+- name: Create custom config files
+  become: yes
+  loop: "{{ postgrest_dbs }}"
+  ansible.builtin.template:
+    src: "postgrest_{{ item.name }}.conf"
+    dest: "/etc/postgrest/postgrest_{{ item.name }}.conf"
     owner: postgrest
     group: postgrest
     mode: '0400'

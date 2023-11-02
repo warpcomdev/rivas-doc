@@ -8,7 +8,7 @@ Referencia: https://www.postgresql.org/about/news/postgresql-16-released-2715/
 sudo apt install -y postgresql-common
 sudo /usr/share/postgresql-common/pgdg/apt.postgresql.org.sh
 
-sudo apt install postgresql-16 postgresql-16-postgis
+sudo apt install postgresql-16 postgresql-16-postgis python3-psycopg2 acl
 ```
 
 ## Servidor API

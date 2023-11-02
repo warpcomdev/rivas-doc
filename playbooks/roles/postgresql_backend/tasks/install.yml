@@ -17,3 +17,11 @@
     - "postgresql-{{ postgresql_version }}-postgis"
     state: present
   become: yes
+
+- name: Install python3 psycopg2 and acl
+  package:
+    name:
+    - python3-psycopg2
+    - acl
+    state: present
+  become: yes
