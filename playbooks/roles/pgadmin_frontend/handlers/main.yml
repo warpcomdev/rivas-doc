@@ -1,2 +1,7 @@
 ---
 # handlers file for postgres_server
+- name: Restart pgadmin4
+  become: yes
+  ansible.builtin.systemd:
+    name: pgadmin4
+    state: restarted

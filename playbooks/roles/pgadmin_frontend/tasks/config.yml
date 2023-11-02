@@ -16,6 +16,8 @@
     owner: root
     group: root
     mode: '0644'
+  notify:
+  - Restart pgadmin4
 
 # This is interactive, must be manual
 #- name: Run initial pgadmin4 setup
@@ -39,3 +41,5 @@
     owner: www-data
     group: www-data
     mode: '0400'
+  notify:
+  - Restart pgadmin4
