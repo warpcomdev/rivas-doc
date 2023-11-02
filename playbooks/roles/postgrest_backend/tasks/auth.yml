@@ -1,3 +1,11 @@
+- name: "CREATE EXTENSION pgcrypto IN DB {{ postgrest_database }}"
+  become_user: postgres
+  become: yes
+  community.postgresql.postgresql_ext:
+    db: "{{ postgrest_database }}"
+    name: pgcrypto
+    state: present
+
 - name: Create SQL template file
   ansible.builtin.template:
     src: auth.sql

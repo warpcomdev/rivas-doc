@@ -38,7 +38,7 @@
   become: yes
   loop: "{{ postgrest_dbs }}"
   ansible.builtin.template:
-    src: "postgrest_{{ item.name }}.conf"
+    src: "postgrest.conf"
     dest: "/etc/postgrest/postgrest_{{ item.name }}.conf"
     owner: postgrest
     group: postgrest

@@ -1,7 +1,7 @@
 - name: "CREATE DATABASE {{ postgrest_dbs | join(',') }}"
   become_user: postgres
   become: yes
-  loop: "{{ postgres_dbs }}"
+  loop: "{{ postgrest_dbs }}"
   community.postgresql.postgresql_db:
     name: "{{ item.name }}"
     owner: postgres
@@ -9,7 +9,7 @@
     template: template0
 
 - name: "CREATE SCHEMAS"
-  loop: "{{ postgrest_dbs | subitems('schemas') }}"
+  loop: "{{ postgrest_dbs | subelements('schemas') }}"
   become_user: postgres
   become: yes
   community.postgresql.postgresql_schema:

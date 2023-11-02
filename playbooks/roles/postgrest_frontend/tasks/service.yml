@@ -17,7 +17,7 @@
 
 - name: Enable other postgrest services
   become: yes
-  loop: "postgrest_dbs"
+  loop: "{{ postgrest_dbs }}"
   ansible.builtin.systemd:
     name: "postgrest@{{ item.name }}"
     state: started
