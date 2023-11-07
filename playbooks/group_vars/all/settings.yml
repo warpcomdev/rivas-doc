@@ -16,19 +16,26 @@ postgrest_authenticator_role: authenticator
 postgrest_anon_role: web_anon
 # Base de datos a crear para postgrest
 postgrest_dbs:
-- bbddunicarivas
+- terceros
+- territorios
+- empleados
 # Rutas de api, y combinaciones de bbdd + schemas a las que dan acceso
 # NOTA: el path "auth" está reservado para la base de datos de login
 postgrest_alias:
-- database: bbddunicarivas
-  path: bbddunicarivas
+- database: terceros
+  path: terceros
   api_port: "3001"
   schemas:
-  - empleados
-  - terceros
-  - territorios
-- database: bbddunicarivas
-  path: telecomunicaciones
+  - public
+- database: territorios
+  path: territorios
   api_port: "3002"
   schemas:
-  - telecomunicaciones
+  - catalogos
+  - geo
+  - meta
+- database: empleados
+  path: telecomunicaciones
+  api_port: "3003"
+  schemas:
+  - public

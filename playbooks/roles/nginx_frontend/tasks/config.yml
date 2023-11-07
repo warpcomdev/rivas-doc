@@ -14,7 +14,7 @@
   ansible.builtin.unarchive:
     src: swagger-ui-dist.tgz
     dest: /var/www/html
-    #creates: /var/www/html/swagger-ui-bundle.js
+    creates: /var/www/html/swagger-ui-bundle.js
 
 - name: Replace default swagger ui URL in all files
   become: yes
