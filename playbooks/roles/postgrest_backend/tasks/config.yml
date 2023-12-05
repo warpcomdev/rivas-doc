@@ -39,7 +39,7 @@
     database: "{{ postgrest_database }}"
     type: group
     state: present
-    objs: "{{ $item }}"
+    objs: "{{ item }}"
     roles: "{{ postgrest_authenticator_role }}"
 
 - name: "CREATE DATABASE {{ postgrest_database }}"
