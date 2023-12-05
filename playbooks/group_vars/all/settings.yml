@@ -21,8 +21,8 @@ postgrest_roles:
 - group_spai_user
 - group_padron_admin
 - group_padron_user
-# Modo de acceso a la API: follow-privileges / ignore-privileges
-openapi_mode: follow-privileges
+# Modo de visualización de la API: follow-privileges / ignore-privileges
+openapi_mode: ignore-privileges
 # Base de datos a crear para postgrest
 postgrest_dbs:
 - bbddunicarivas
