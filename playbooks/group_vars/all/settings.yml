@@ -26,11 +26,19 @@ openapi_mode: ignore-privileges
 # Base de datos a crear para postgrest
 postgrest_dbs:
 - bbddunicarivas
-- terceros
-- territorios
-- empleados
+# Estas bases de datos finalmente no se usan
+# - terceros
+# - territorios
+# - empleados
+# ---
 # Rutas de api, y combinaciones de bbdd + schemas a las que dan acceso
-# NOTA: el path "auth" está reservado para la base de datos de login
+# NOTA: el path "auth" está reservado para la base de datos de login.
+# - Utilizando la ruta /api/{path}, se accede a la API de la base de datos.
+#   se puede seleccionar un schema añadiendo las cabeceras Accept-Profile
+#   o Content-Profile como se indica en la doc. de postgrest.
+# - Utilizando la ruta /api/{path}/{schema}, nginx añade directamente esas
+#   cabeceras, de forma que se pueda por ejemplo ver el swagger del schema
+#   en esa ruta, sin necesidad de añadir la cabecera manualmente.
 postgrest_alias:
 - database: bbddunicarivas
   path: bbddunicarivas
@@ -44,20 +52,21 @@ postgrest_alias:
   - cat_empleados
   - cat_global
   - public
-- database: terceros
-  path: terceros
-  api_port: "3002"
-  schemas:
-  - public
-- database: territorios
-  path: territorios
-  api_port: "3003"
-  schemas:
-  - catalogos
-  - geo
-  - meta
-- database: empleados
-  path: empleados
-  api_port: "3004"
-  schemas:
-  - public
+# Estas bases de datos finalmente no se usan
+# - database: terceros
+#   path: terceros
+#   api_port: "3002"
+#   schemas:
+#   - public
+# - database: territorios
+#   path: territorios
+#   api_port: "3003"
+#   schemas:
+#   - catalogos
+#   - geo
+#   - meta
+# - database: empleados
+#   path: empleados
+#   api_port: "3004"
+#   schemas:
+#   - public
