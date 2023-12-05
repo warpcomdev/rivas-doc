@@ -1,6 +1,6 @@
 ---
 postgresql_version: "16"
-postgrest_version: "v11.2.1"
+postgrest_version: "v12.0.0"
 postgrest_url: https://172.17.121.37/api
 postgresql_host: "{{ hostvars['srvbbddunicadb1']['ansible_default_ipv4']['address'] }}"
 postgresql_port: 5432
