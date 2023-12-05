@@ -13,6 +13,14 @@
     name: "{{ postgrest_anon_role }}"
     role_attr_flags: "NOLOGIN"
 
+- name: "CREATE ROLE {{ item }} NOLOGIN"
+  become_user: postgres
+  become: yes
+  with_items: "{{ postgrest_roles }}"
+  community.postgresql.postgresql_user:
+    name: "{{ item }}"
+    role_attr_flags: "NOLOGIN"
+
 - name: "Grant {{ postgrest_anon_role }} to {{ postgrest_authenticator_role }}"
   become_user: postgres
   become: yes
@@ -21,6 +29,17 @@
     type: group
     state: present
     objs: "{{ postgrest_anon_role }}"
+    roles: "{{ postgrest_authenticator_role }}"
+
+- name: "Grant other roles to {{ postgrest_authenticator_role }}"
+  become_user: postgres
+  become: yes
+  with_items: "{{ postgrest_roles }}"
+  community.postgresql.postgresql_privs:
+    database: "{{ postgrest_database }}"
+    type: group
+    state: present
+    objs: "{{ $item }}"
     roles: "{{ postgrest_authenticator_role }}"
 
 - name: "CREATE DATABASE {{ postgrest_database }}"
