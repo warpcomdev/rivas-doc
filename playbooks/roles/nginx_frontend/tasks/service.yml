@@ -4,6 +4,8 @@
     name: apache2
     state: stopped
     enabled: no
+  # In case the seervice actually does not exist
+  ignore_errors: yes
 
 - name: Enable nginx service
   become: yes

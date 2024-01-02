@@ -1,8 +1,7 @@
 ---
 postgresql_version: "16"
 postgrest_version: "v12.0.0"
-postgrest_url: https://172.17.121.37/api
-postgresql_host: "{{ hostvars['srvbbddunicadb1']['ansible_default_ipv4']['address'] }}"
+postgrest_url: "https://{{ postgrest_host }}/api"
 postgresql_port: 5432
 # Settings de pgadmin4
 pgadmin4_database: system

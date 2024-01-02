@@ -1,6 +1,8 @@
-- name: Install postgresql-common
+- name: Install postgresql-common and locales
   package:
-    name: postgresql-common
+    name:
+    - postgresql-common
+    - language-pack-es
     state: present
   become: yes
 
