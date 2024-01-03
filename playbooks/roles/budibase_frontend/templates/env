@@ -1,0 +1,28 @@
+# Use the main port in the builder for your self hosting URL, e.g. localhost:10000
+MAIN_PORT=10000
+
+# This section contains all secrets pertaining to the system
+# These should be updated
+API_ENCRYPTION_KEY={{budibase_enckey}}
+JWT_SECRET={{budibase_jwt_secret}}
+MINIO_ACCESS_KEY={{minio_root_user}}
+MINIO_SECRET_KEY={{minio_root_password}}
+COUCH_DB_PASSWORD={{couchdb_password}}
+COUCH_DB_USER=admin
+REDIS_PASSWORD={{redis_password}}
+INTERNAL_API_KEY={{budibase_apikey}}
+
+# This section contains variables that do not need to be altered under normal circumstances
+APP_PORT=4002
+WORKER_PORT=4003
+REDIS_PORT=6379
+BUDIBASE_ENVIRONMENT=PRODUCTION
+SQL_MAX_ROWS=
+
+# An admin user can be automatically created initially if these are set
+BB_ADMIN_USER_EMAIL={{budibase_admin_user}}
+BB_ADMIN_USER_PASSWORD={{budibase_admin_password}}
+
+# A path that is watched for plugin bundles. Any bundles found are imported automatically/
+PLUGINS_DIR=
+ROLLING_LOG_MAX_SIZE=

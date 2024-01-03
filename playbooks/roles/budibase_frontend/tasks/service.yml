@@ -1,0 +1,17 @@
+- name: Copy systemd service for budibase
+  become: yes
+  copy:
+    src: budibase.service
+    dest: /etc/systemd/system/budibase.service
+    mode: '0644'
+    owner: root
+    group: root
+  register: budibase_service
+
+- name: Enable budibase service
+  become: yes
+  ansible.builtin.systemd:
+    name: budibase
+    state: started
+    enabled: yes
+    daemon_reload: "{{budibase_service.changed}}"

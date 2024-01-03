@@ -50,3 +50,16 @@
   package:
     name: couchdb
     state: present
+
+- name: Secure couchdb folders
+  become: yes
+  with_items:
+  - /opt/couchdb
+  - /etc/couchdb
+  - /var/lib/couchdb
+  file:
+    path: "{{item}}"
+    owner: couchdb
+    group: couchdb
+    mode: o-rwx
+    recurse: yes

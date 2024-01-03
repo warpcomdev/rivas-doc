@@ -1,0 +1,34 @@
+- name: Create budibase group
+  become: yes
+  group:
+    name: budibase
+    system: true
+    state: present
+
+- name: Create budibase user with docker additional group
+  become: yes
+  user:
+    name: budibase
+    system: true
+    group: budibase
+    state: present
+    groups: docker
+    append: yes
+
+- name: Create budibase folder
+  become: yes
+  file:
+    path: /opt/budibase
+    state: directory
+    mode: '0755'
+    owner: budibase
+    group: budibase
+
+- name: Copy budibase docker-compose.yml
+  become: yes
+  template:
+    src: docker-compose.yaml
+    dest: /opt/budibase/docker-compose.yml
+    mode: '0644'
+    owner: budibase
+    group: budibase

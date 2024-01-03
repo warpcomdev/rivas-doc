@@ -1,0 +1,9 @@
+---
+- name: Copy budibase .env file
+  become: yes
+  template:
+    src: env
+    dest: /opt/budibase/.env
+    mode: '0640'
+    owner: budibase
+    group: budibase

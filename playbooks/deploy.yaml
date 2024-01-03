@@ -12,5 +12,10 @@
   - nginx_frontend
   - postgrest_frontend
   - pgadmin_frontend
+  # NOTA: finalmente no usamos el rol de redis,
+  # preferimos dejarlo dentro del docker-compose de budibase
+  # por simplicidad. No es necesario hacer backups de este
+  # redis, es un almacén de sesiones.
   - redis_frontend
   - docker_frontend
+  - budibase_frontend

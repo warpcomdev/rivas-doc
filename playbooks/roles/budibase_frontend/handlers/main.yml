@@ -1,0 +1,7 @@
+---
+# handlers file for redis_server
+- name: Restart budibase
+  become: yes
+  ansible.builtin.systemd:
+    name: budibase
+    state: restarted
