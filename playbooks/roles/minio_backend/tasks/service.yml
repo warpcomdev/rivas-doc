@@ -1,0 +1,29 @@
+# Override PassEnvironment, otherwise the unit won't work
+- name: Create minio.service.d directory
+  become: yes
+  file:
+    path: /etc/systemd/system/minio.service.d/
+    state: directory
+    owner: root
+    group: root
+    mode: 0755
+
+# template module will create a file
+- name: Copy minio.service drop-in
+  become: yes
+  template:
+    src: override.conf
+    dest: /etc/systemd/system/minio.service.d/override.conf
+    owner: root
+    group: root
+    mode: 0644
+  register: minio_service_override
+
+# Enable minio service
+- name: Enable minio service
+  become: yes
+  ansible.builtin.systemd:
+    name: minio
+    state: started
+    enabled: yes
+    daemon_reload: "{{minio_service_override.changed}}"

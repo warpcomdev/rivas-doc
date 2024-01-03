@@ -1,0 +1,28 @@
+- name: create minio-user group
+  become: true
+  ansible.builtin.group:
+    name: minio-user
+    state: present
+    system: true
+
+- name: create minio-user system user
+  become: true
+  ansible.builtin.user:
+    name: minio-user
+    group: minio-user
+    state: present
+    create_home: false
+    system: true
+
+- name: Install deb prerequisites
+  become: true
+  package:
+    name:
+    - xz-utils
+    state: present
+
+- name: Install minio .deb
+  become: yes
+  ansible.builtin.apt:
+    deb: "{{ minio_download_url }}"
+    state: present

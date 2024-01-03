@@ -1,0 +1,20 @@
+---
+- name: Create minio folder
+  become: yes
+  ansible.builtin.file:
+    path: "{{minio_volumes}}"
+    state: directory
+    owner: minio-user
+    group: minio-user
+    mode: '0750'
+
+- name: Copy minio config file
+  become: yes
+  ansible.builtin.template:
+    src: minio
+    dest:  /etc/default/minio
+    owner: minio-user
+    group: minio-user
+    mode: '0640'
+  notify:
+  - Restart minio

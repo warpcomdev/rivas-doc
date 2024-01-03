@@ -1,0 +1,36 @@
+- name: Install GPG
+  become: true
+  package:
+    name: gpg
+    state: present
+
+- name: Download docker armored key
+  ansible.builtin.get_url:
+    url: https://download.docker.com/linux/ubuntu/gpg
+    dest: /tmp/docker.gpg
+
+- name: De-armor docker GPG key
+  become: true
+  shell: cat /tmp/docker.gpg | gpg --dearmor > /usr/share/keyrings/docker.gpg
+
+- name: Install docker repo
+  become: yes
+  ansible.builtin.apt_repository:
+    repo: "deb [arch=amd64 signed-by=/usr/share/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu {{ansible_distribution_release}} stable"
+    state: present
+  register: docker_repo
+
+- name: Update apt cache
+  become: yes
+  ansible.builtin.apt:
+    update_cache: yes
+  when: docker_repo.changed
+
+- name: Install docker
+  become: yes
+  package:
+    name:
+    - docker-ce
+    - docker-ce-cli
+    - docker-compose-plugin
+    state: present

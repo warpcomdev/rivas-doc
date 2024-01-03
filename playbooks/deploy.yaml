@@ -4,6 +4,7 @@
   - postgresql_backend
   - postgrest_backend
   - couchdb_backend
+  - minio_backend
 
 - name: Prepare frontend servers
   hosts: frontend
@@ -12,3 +13,4 @@
   - postgrest_frontend
   - pgadmin_frontend
   - redis_frontend
+  - docker_frontend

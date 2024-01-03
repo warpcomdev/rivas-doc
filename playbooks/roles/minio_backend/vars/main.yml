@@ -1,0 +1,3 @@
+---
+minio_download_url: https://dl.min.io/server/minio/release/linux-amd64/archive/minio_20240101163633.0.0_amd64.deb
+minio_volumes: /var/lib/minio
