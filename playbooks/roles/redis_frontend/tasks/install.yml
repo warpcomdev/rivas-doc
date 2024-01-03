@@ -1,0 +1,33 @@
+- name: Install GPG
+  become: true
+  package:
+    name: gpg
+    state: present
+
+- name: Download redis armored key
+  ansible.builtin.get_url:
+    url: https://packages.redis.io/gpg
+    dest: /tmp/redis-archive-keyring.gpg
+
+- name: De-armor redis GPG key
+  become: true
+  shell: cat /tmp/redis-archive-keyring.gpg | gpg --dearmor > /usr/share/keyrings/redis-archive-keyring.gpg
+
+- name: Install redis package repo
+  become: yes
+  ansible.builtin.apt_repository:
+    repo: "deb [signed-by=/usr/share/keyrings/redis-archive-keyring.gpg] https://packages.redis.io/deb {{ansible_distribution_release}} main"
+    state: present
+  register: redis_repo
+
+- name: Update apt cache
+  become: yes
+  ansible.builtin.apt:
+    update_cache: yes
+  when: redis_repo.changed
+
+- name: Install redis
+  become: yes
+  package:
+    name: redis
+    state: present

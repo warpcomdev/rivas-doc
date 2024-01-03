@@ -1,0 +1,8 @@
+- name: Enable redis service
+  become: yes
+  ansible.builtin.systemd:
+    name: redis-server
+    state: started
+    enabled: yes
+    daemon_reload: yes
+

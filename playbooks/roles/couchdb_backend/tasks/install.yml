@@ -1,0 +1,52 @@
+- name: Install GPG and debconf
+  become: true
+  package:
+    name:
+    - debconf
+    - debconf-utils
+    - gpg
+    state: present
+
+- name: Download couchdb armored key
+  ansible.builtin.get_url:
+    url: https://couchdb.apache.org/repo/keys.asc
+    dest: /tmp/couchdb-archive-keyring.gpg
+
+- name: De-armor couchdb GPG key
+  become: true
+  shell: cat /tmp/couchdb-archive-keyring.gpg | gpg --dearmor > /usr/share/keyrings/couchdb-archive-keyring.gpg
+
+- name: Install couchdb package repo
+  become: yes
+  ansible.builtin.apt_repository:
+    repo: "deb [signed-by=/usr/share/keyrings/couchdb-archive-keyring.gpg] https://apache.jfrog.io/artifactory/couchdb-deb/ {{ansible_distribution_release}} main"
+    state: present
+  register: couchdb_repo
+
+- name: Update apt cache
+  become: yes
+  ansible.builtin.apt:
+    update_cache: yes
+  when: couchdb_repo.changed
+
+# Setup debconf for couchdb standalone
+# See https://github.com/apache/couchdb-pkg/blob/main/debian/README.Debian
+- name: Setup couchdb with debconf
+  become: yes
+  ansible.builtin.shell: |
+    echo "couchdb couchdb/mode select standalone
+    couchdb couchdb/mode seen true
+    couchdb couchdb/bindaddress string 0.0.0.0
+    couchdb couchdb/bindaddress seen true
+    couchdb couchdb/cookie string '{{couchdb_cookie}}'
+    couchdb couchdb/cookie seen true
+    couchdb couchdb/adminpass password '{{couchdb_password}}'
+    couchdb couchdb/adminpass seen true
+    couchdb couchdb/adminpass_again password '{{couchdb_password}}'
+    couchdb couchdb/adminpass_again seen true" | debconf-set-selections
+
+- name: Install couchdb
+  become: yes
+  package:
+    name: couchdb
+    state: present

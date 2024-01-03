@@ -3,6 +3,7 @@
   roles:
   - postgresql_backend
   - postgrest_backend
+  - couchdb_backend
 
 - name: Prepare frontend servers
   hosts: frontend
@@ -10,3 +11,4 @@
   - nginx_frontend
   - postgrest_frontend
   - pgadmin_frontend
+  - redis_frontend

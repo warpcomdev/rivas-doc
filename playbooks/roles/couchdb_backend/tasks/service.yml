@@ -1,0 +1,6 @@
+- name: Enable couchdb service
+  become: yes
+  ansible.builtin.systemd:
+    name: couchdb
+    state: started
+    enabled: yes
